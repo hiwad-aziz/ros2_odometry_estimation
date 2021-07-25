@@ -20,7 +20,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(nav_msgs REQUIRED)
 
-add_executable(odometry_estimator src/odometry_estimation_node.cpp)
+add_executable(odometry_estimator src/odometry_estimation_node.cpp
+                                  src/vehicle_models.cpp)
 ament_target_dependencies(odometry_estimator rclcpp nav_msgs)
 target_include_directories(
   odometry_estimator
