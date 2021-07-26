@@ -4,6 +4,8 @@
 
 #include <chrono>
 #include <functional>
+#include <numeric>
+
 using std::placeholders::_1;
 using namespace std::chrono_literals;
 
@@ -28,19 +30,28 @@ OdometryEstimator::OdometryEstimator() : Node("odometry_publisher")
 
 void OdometryEstimator::handleRightWheelInput(const std_msgs::msg::Int64::SharedPtr rpm_right)
 {
-  rpm_right_ = rpm_right->data;
+  rpms_right_.push_back(rpm_right->data);
 }
 
 void OdometryEstimator::handleLeftWheelInput(const std_msgs::msg::Int64::SharedPtr rpm_left)
 {
-  rpm_left_ = rpm_left->data;
+  rpms_left_.push_back(rpm_left->data);
 }
 
 void OdometryEstimator::publish()
 {
+  // calculate passed time since last publish
+  TimePoint current_time = Clock::now();
+  std::chrono::duration<double> dt = current_time - previous_time_;
+  // calculate average of received rpm signals
+  int rpm_left_avg = std::accumulate(rpms_left_.begin(), rpms_left_.end(), 0.0) / rpms_left_.size();
+  int rpm_right_avg =
+      std::accumulate(rpms_right_.begin(), rpms_right_.end(), 0.0) / rpms_right_.size();
+  rpms_left_.clear();
+  rpms_right_.clear();
   // calculate new state based on input
-  double dt = 1 - 0;
-  VehicleState new_state = vehicle_model_->calculateNextState(rpm_left_, rpm_right_, state_, dt);
+  VehicleState new_state =
+      vehicle_model_->calculateNextState(rpm_left_avg, rpm_right_avg, state_, dt.count());
   // create quaternion from yaw angle
   tf2::Quaternion quat;
   quat.setRPY(0.0, 0.0, new_state.yaw);
@@ -55,6 +66,7 @@ void OdometryEstimator::publish()
   publisher_->publish(message);
   // update internal state
   state_ = new_state;
+  previous_time_ = current_time;
 }
 
 int main(int argc, char* argv[])
