@@ -3,6 +3,9 @@
 
 #include <memory>
 
+class VehicleModel;
+using VehicleModelPtr = std::unique_ptr<VehicleModel>;
+
 constexpr double WHEEL_RADIUS = 0.03;
 constexpr double VEHICLE_TRACK = 0.2;
 
