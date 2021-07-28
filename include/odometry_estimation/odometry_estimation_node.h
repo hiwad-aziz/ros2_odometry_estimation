@@ -20,8 +20,8 @@ class OdometryEstimator : public rclcpp::Node {
   void handleRightWheelInput(const std_msgs::msg::Int64::SharedPtr rpm_right);
   void handleLeftWheelInput(const std_msgs::msg::Int64::SharedPtr rpm_left);
   void publish();
-  VehicleModelPtr vehicle_model_;
-  VehicleState state_;
+  VehicleModelPtr vehicle_model_{nullptr};
+  VehicleState state_{0.0, 0.0, 0.0};
   std::vector<int> rpms_left_;
   std::vector<int> rpms_right_;
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr publisher_;
