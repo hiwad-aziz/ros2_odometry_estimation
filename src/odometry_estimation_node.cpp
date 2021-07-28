@@ -57,6 +57,8 @@ void OdometryEstimator::publish()
   quat.setRPY(0.0, 0.0, new_state.yaw);
   // fill message and publish
   auto message = nav_msgs::msg::Odometry();
+  message.header.stamp = this->get_clock()->now();
+  message.header.frame_id = "odom";
   message.pose.pose.position.x = new_state.x;
   message.pose.pose.position.y = new_state.y;
   message.pose.pose.orientation.x = quat.x();
