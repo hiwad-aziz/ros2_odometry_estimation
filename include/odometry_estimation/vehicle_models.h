@@ -6,8 +6,8 @@
 class VehicleModel;
 using VehicleModelPtr = std::unique_ptr<VehicleModel>;
 
-constexpr double WHEEL_RADIUS = 0.03;
-constexpr double VEHICLE_TRACK = 0.2;
+constexpr double WHEEL_RADIUS = 0.028;
+constexpr double VEHICLE_TRACK = 0.1;
 
 struct VehicleState {
   double x;
@@ -33,6 +33,11 @@ class DifferentialDriveModel : public VehicleModel {
   static std::unique_ptr<VehicleModel> create();
 
   friend VehicleModel;
+};
+
+class HelperMethods {
+ public:
+  static double wrapAngle(double angle);
 };
 
 #endif  // VEHICLE_MODELS_H
