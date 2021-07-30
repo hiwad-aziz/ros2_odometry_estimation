@@ -6,8 +6,8 @@
 class VehicleModel;
 using VehicleModelPtr = std::unique_ptr<VehicleModel>;
 
-constexpr double WHEEL_RADIUS = 0.028;
-constexpr double VEHICLE_TRACK = 0.1;
+constexpr double WHEEL_RADIUS = 0.0335;
+constexpr double VEHICLE_TRACK = 0.134;
 
 struct VehicleState {
   double x;
