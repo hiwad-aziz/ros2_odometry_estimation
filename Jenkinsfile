@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build ROS2 package') {
             steps {
-                sh '''#!/bin/bash;
+                sh '''#!/bin/bash
                 mkdir -p colcon_ws/src;
                 cd colcon_ws;
                 source /opt/ros/foxy/setup.sh;
