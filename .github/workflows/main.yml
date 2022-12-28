@@ -1,8 +1,14 @@
 name: ros2_odometry_estimation
-on: [push]
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
 jobs:
   build-and-test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: ros-tooling/setup-ros@v0.3
         with:
