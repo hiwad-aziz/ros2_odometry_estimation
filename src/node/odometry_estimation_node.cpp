@@ -1,4 +1,4 @@
-#include "odometry_estimation/odometry_estimation_node.h"
+#include "odometry_estimation_node.h"
 
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 

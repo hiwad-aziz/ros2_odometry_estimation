@@ -1,4 +1,4 @@
-#include "odometry_estimation/vehicle_models.h"
+#include "vehicle_models.h"
 
 #include <cmath>
 #include <limits>

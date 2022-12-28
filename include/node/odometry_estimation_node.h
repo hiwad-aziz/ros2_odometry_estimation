@@ -6,7 +6,7 @@
 #include <std_msgs/msg/int64.hpp>
 #include <vector>
 
-#include "odometry_estimation/vehicle_models.h"
+#include "vehicle_models.h"
 #include "rclcpp/rclcpp.hpp"
 
 using Clock = std::chrono::high_resolution_clock;
