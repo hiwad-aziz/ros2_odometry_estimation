@@ -1,0 +1,20 @@
+name: ros2_odometry_estimation
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ros-tooling/setup-ros@v0.3
+        with:
+          required-ros-distributions: foxy
+      - uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          package-name: odometry_estimator
+          target-ros2-distro: foxy
+          colcon-defaults: |
+            {
+              "build": {
+                "mixin": ["coverage-gcc"]
+              }
+            }
+          colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/1ddb69bedfd1f04c2f000e95452f7c24a4d6176b/index.yaml
